@@ -113,38 +113,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.17.0"
-  connectivity:
-    dependency: "direct main"
-    description:
-      name: connectivity
-      sha256: "63c75e3b899f89b4f3c0ed2aedb1a2833bb04cb141d74718bf8f38b1d23f7a32"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.9+5"
-  connectivity_for_web:
-    dependency: transitive
-    description:
-      name: connectivity_for_web
-      sha256: a90f39f9e2c9533a189b05596ce2eea9494b61efa34a78f079ba06fa4c50075d
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.1+4"
-  connectivity_macos:
-    dependency: transitive
-    description:
-      name: connectivity_macos
-      sha256: "2ac537281b02e1117f50b154bd5a6b18cb889d6c18e2f415104886e4d2b6549e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.0+7"
-  connectivity_platform_interface:
-    dependency: transitive
-    description:
-      name: connectivity_platform_interface
-      sha256: "3e3c0891ec5d22c0e265b0df5743810c91160a30ac4f3327cf04fd24782e8add"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.6"
   convert:
     dependency: transitive
     description:
@@ -288,6 +256,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.4"
+  internet_connection_checker:
+    dependency: "direct main"
+    description:
+      name: internet_connection_checker
+      sha256: "1c683e63e89c9ac66a40748b1b20889fd9804980da732bf2b58d6d5456c8e876"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0+1"
   js:
     dependency: transitive
     description:
