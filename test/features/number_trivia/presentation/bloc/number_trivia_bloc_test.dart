@@ -45,12 +45,15 @@ void main() {
     // NumberTrivia instance is needed too, of course
     const tNumberTrivia = NumberTrivia(number: 1, text: 'test trivia');
 
+    void setUpMockInputConverterSuccess() =>
+        when(mockInputConverter.stringToUnsignedInteger(any))
+            .thenReturn(Right(tNumberParsed));
+
     test(
       'should call the InputConverter to validate and convert the string to an unsigned integer',
       () async {
         // arrange
-        when(mockInputConverter.stringToUnsignedInteger(any ?? ''))
-            .thenReturn(Right(tNumberParsed));
+        setUpMockInputConverterSuccess();
         // act
         bloc.add(GetTriviaForConcreteNumber(tNumberString));
         await untilCalled(
@@ -74,7 +77,41 @@ void main() {
         ];
         expectLater(bloc.state, emitsInOrder(expected));
         // act
-        bloc.add(GetTriviaForConcreteNumber(tNumberString));
+        bloc.add(const GetTriviaForConcreteNumber(tNumberString));
+      },
+    );
+
+    test(
+      'should get data from the concrete use case',
+      () async {
+        // arrange
+        setUpMockInputConverterSuccess();
+        when(mockGetConcreteNumberTrivia(const Params(number: 1)))
+            .thenAnswer((_) async => const Right(tNumberTrivia));
+        // act
+        bloc.add(const GetTriviaForConcreteNumber(tNumberString));
+        await untilCalled(mockGetConcreteNumberTrivia(const Params(number: 1)));
+        // assert
+        verify(mockGetConcreteNumberTrivia(Params(number: tNumberParsed)));
+      },
+    );
+
+    test(
+      'should emit [Loading, Loaded] when data is gotten successfully',
+      () async {
+        // arrange
+        setUpMockInputConverterSuccess();
+        when(mockGetConcreteNumberTrivia(const Params(number: 1)))
+            .thenAnswer((_) async => const Right(tNumberTrivia));
+        // assert later
+        final expected = [
+          Empty(),
+          Loading(),
+          const Loaded(trivia: tNumberTrivia),
+        ];
+        expectLater(bloc.state, emitsInOrder(expected));
+        // act
+        bloc.add(const GetTriviaForConcreteNumber(tNumberString));
       },
     );
   });
